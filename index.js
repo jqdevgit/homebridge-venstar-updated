@@ -5,7 +5,6 @@ const PLATFORM_NAME = 'VenstarThermostats'
 
 class VenstarThermostatsPlatform {
 	constructor(log, config, api) {
-		console.log("Inside Constructor!!!");
 		this.log = log
 		this.config = config
 		this.api = api

@@ -53,6 +53,9 @@ class VenstarThermostatsPlatformAccessory {
             .getCharacteristic(this.platform.Characteristic.Active)
             .onGet(this.handleFanActiveGet.bind(this))
             .onSet(this.handleFanActiveSet.bind(this));
+
+        // set up
+        this.pullState();
             
     }
     
@@ -80,6 +83,19 @@ class VenstarThermostatsPlatformAccessory {
         return this.State.mode;
     }
     async handleTargetHeatingCoolingStateSet(value) {
+		let targetTemp;
+		switch (value) {
+			case 2:
+           		targetTemp = this.State.cooltemp;
+            	break;
+        	case 1:
+            	targetTemp = this.State.heattemp;
+            	break;
+        	default:
+            	targetTemp = (this.State.heattemp + this.State.cooltemp) / 2;
+            	break; 
+			}
+		this.service.getCharacteristic(this.platform.Characteristic.TargetTemperature).updateValue(targetTemp);
         this.API.setControl("mode=" + value);
     }
     async handleCurrentTemperatureGet() {
@@ -102,7 +118,6 @@ class VenstarThermostatsPlatformAccessory {
                 targetTemp = (this.State.heattemp + this.State.cooltemp) / 2;
                 break;
         }
-        console.log("handleTargetTempGet: ", targetTemp);
         return targetTemp;
     }
     async handleTargetTemperatureSet(value) {
@@ -119,7 +134,6 @@ class VenstarThermostatsPlatformAccessory {
         });
     }
     async handleCoolingTemperatureGet() {
-    	console.log("handleCoolingTempGet");
         this.pullState().then((state) => {
         	this.service.getCharacteristic(this.platform.Characteristic.CoolingThresholdTemperature).updateValue(state.cooltemp);
         });
@@ -127,7 +141,6 @@ class VenstarThermostatsPlatformAccessory {
     }
     async handleCoolingTemperatureSet(value) {
         value = this.convertTemp(value).toFixed(2).toString();
-        console.log("setting temp to: ", value);
         this.API.setControl("cooltemp=" + value);
     }
     async handleHeatingTemperatureGet() {

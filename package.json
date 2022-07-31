@@ -1,7 +1,7 @@
 {
-  "displayName": "Venstar Explorer Mini Thermostat",
+  "displayName": "Venstar Explorer Mini Thermostats",
   "name": "homebridge-venstar-thermostats",
-  "version": "0.9.0",
+  "version": "0.9.3",
   "description": "A homebridge plugin for Venstar Explorer Mini thermostats",
   "license": "ISC",
   "main": "index.js",
