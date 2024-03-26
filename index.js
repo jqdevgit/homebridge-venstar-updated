@@ -1,6 +1,6 @@
 let Service, Characteristic, Accessory, UUID
 const platformAccessory = require('./platformAccessory.js');
-const PLUGIN_NAME = 'homebridge-venstar-thermostats'
+const PLUGIN_NAME = 'homebridge-venstar-updated'
 const PLATFORM_NAME = 'VenstarThermostats'
 
 class VenstarThermostatsPlatform {
@@ -57,19 +57,3 @@ class VenstarThermostatsPlatform {
 module.exports = (api) => {
 	api.registerPlatform(PLUGIN_NAME, PLATFORM_NAME, VenstarThermostatsPlatform);
 }
-
-/*
-module.exports = function (homebridge) {
-  //Service = homebridge.hap.Service
-  //Characteristic = homebridge.hap.Characteristic
-  //Accessory = homebridge.hap.Accessory
-  //UUID = homebridge.hap.uuid
-  homebridge.registerPlatform(
-    PLUGIN_NAME,
-    PLATFORM_NAME,
-    VenstarThermostatsPlatform,
-    true
-  )
-
-}
-  */
