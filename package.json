@@ -1,7 +1,7 @@
 {
 "displayName": "Venstar Thermostats",
 "name": "homebridge-venstar-updated",
-"version": "0.1",
+"version": "0.1.0",
 "description": "Homebridge plugin for Venstar thermostats",
 "license": "ISC",
 "main": "index.js",
