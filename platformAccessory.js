@@ -9,7 +9,7 @@ class VenstarThermostatsPlatformAccessory {
 		this.accessory
             .getService(this.platform.Service.AccessoryInformation)
             .setCharacteristic(this.platform.Characteristic.Manufacturer, "Venstar")
-            .setCharacteristic(this.platform.Characteristic.Model, "T2000")
+            .setCharacteristic(this.platform.Characteristic.Model, "T7900")
             .setCharacteristic(this.platform.Characteristic.SerialNumber, "UNO");
         this.API = new venstarAPI.VenstarAPI(this.uri);
         this.State = new venstarAPI.GetInfoResponse();
@@ -29,7 +29,7 @@ class VenstarThermostatsPlatformAccessory {
             .onSet(this.handleTargetHeatingCoolingStateSet.bind(this));
         this.service
             .getCharacteristic(this.platform.Characteristic.CurrentTemperature)
-            .onGet(this.handleCurrentTemperatureGet.bind(this));
+            .onGet(this.handleCurrentTemperatureGet.bind(this));                  
         this.service
             .getCharacteristic(this.platform.Characteristic.TargetTemperature)
             .onGet(this.handleTargetTemperatureGet.bind(this))
@@ -45,6 +45,9 @@ class VenstarThermostatsPlatformAccessory {
         this.service
             .getCharacteristic(this.platform.Characteristic.TemperatureDisplayUnits)
             .onGet(this.handleTemperatureDisplayUnitsGet.bind(this));
+        this.service
+            .getCharacteristic(this.platform.Characteristic.CurrentRelativeHumidity)
+            .onGet(this.handleCurrentHumidityGet.bind(this));
         // Fan Service
         const fanService = this.accessory.getService("Fan") ||
             this.accessory.addService(this.platform.Service.Fanv2, "Fan", "YourUniqueIdentifier-2");
@@ -59,6 +62,12 @@ class VenstarThermostatsPlatformAccessory {
             
     }
     
+    async handleCurrentHumidityGet() {
+        this.pullState().then((state) => {
+        	this.service.getCharacteristic(this.platform.Characteristic.CurrentRelativeHumidity).updateValue(state.hum);
+        })
+        return this.State.hum;
+    }
     async handleFanActiveGet() {
         this.pullState().then((state) => {
         	this.service.getCharacteristic(this.platform.Characteristic.On).updateValue(state.fanstate);
@@ -83,20 +92,23 @@ class VenstarThermostatsPlatformAccessory {
         return this.State.mode;
     }
     async handleTargetHeatingCoolingStateSet(value) {
-		let targetTemp;
-		switch (value) {
-			case 2:
-           		targetTemp = this.State.cooltemp;
-            	break;
-        	case 1:
-            	targetTemp = this.State.heattemp;
-            	break;
-        	default:
-            	targetTemp = (this.State.heattemp + this.State.cooltemp) / 2;
-            	break; 
-			}
-		this.service.getCharacteristic(this.platform.Characteristic.TargetTemperature).updateValue(targetTemp);
-        this.API.setControl("mode=" + value);
+        this.pullState();
+        let currentCoolTempTarget = this.State.cooltemp;
+        let currentHeatTempTarget = this.State.heattemp;
+        let targetTemp;
+        switch (value) {
+            case 2:
+                targetTemp = this.State.cooltemp;
+                break;
+            case 1:
+                targetTemp = this.State.heattemp;
+                break;
+            default:
+                targetTemp = (this.State.heattemp + this.State.cooltemp) / 2;
+                break; 
+        }
+        this.service.getCharacteristic(this.platform.Characteristic.TargetTemperature).updateValue(targetTemp);
+        this.API.setControl("mode=" + value + "&heattemp=" + currentHeatTempTarget + "&cooltemp=" + currentCoolTempTarget);
     }
     async handleCurrentTemperatureGet() {
         this.pullState().then((state) => {
@@ -121,16 +133,25 @@ class VenstarThermostatsPlatformAccessory {
         return targetTemp;
     }
     async handleTargetTemperatureSet(value) {
-        this.API.getInfo().then((test) => {
+        this.pullState();
+        let currentCoolTempTarget = this.State.cooltemp;
+        let currentHeatTempTarget = this.State.heattemp;
+        this.API.getInfo().then((test) => {            
             let tempMode;
+            let altTempMode;
+            let altTempValue;          
             if (test.mode == 2) {
                 tempMode = "cooltemp";
+                altTempMode = "heattemp";
+                altTempValue = currentHeatTempTarget;
             }
             else {
                 tempMode = "heattemp";
+                altTempMode = "cooltemp";  
+                altTempValue = currentCoolTempTarget;        
             }
             value = this.convertTemp(value).toFixed(2).toString();
-            this.API.setControl(tempMode + "=" + value);
+            this.API.setControl(tempMode + "=" + value + "&" + altTempMode + "=" + altTempValue);            
         });
     }
     async handleCoolingTemperatureGet() {

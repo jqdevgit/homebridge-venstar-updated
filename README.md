@@ -32,9 +32,9 @@ I've updated it so that you can now change the set temperature and the mode. I'v
 
 The name can be whatever you want. The IP address must be the local IP address of the thermostat. To find this on the T7900:
 
-    * Tap MENU.
-    * Then Wi-Fi.
-    * Then WiFi Status.
-    * Here it will display the IP address of the unit.
+* Tap MENU.
+* Then Wi-Fi.
+* Then WiFi Status.
+* Here it will display the IP address of the unit.
 
 Add multiple entries for additional thermostats.
