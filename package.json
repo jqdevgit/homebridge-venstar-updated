@@ -1,7 +1,7 @@
 {
 "displayName": "Venstar Thermostats",
 "name": "homebridge-venstar-updated",
-"version": "0.1.0",
+"version": "0.2.0-beta.1",
 "description": "Homebridge plugin for Venstar thermostats",
 "license": "ISC",
 "main": "index.js",
@@ -13,8 +13,7 @@
 	"url": "https://github.com/jqdevgit/homebridge-venstar-updated/issues"
 },
 "dependencies": {
-	"isomorphic-fetch": "^3.0.0",
-	"request-promise-native": "^1.0.9"
+	"whatwg-fetch": "^3.6.20"
 },
 "scripts": {
 	"test": "echo \"Error: no test specified\" && exit 1"

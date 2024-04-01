@@ -1,6 +1,15 @@
 # Changelog
 
-## [0.1] - 2024-03-26
+## [Unreleased]
+
+## [0.2.0-beta.1] - 2024-03-31
+
+### Changed
+
+* Use whatwg-fetch instead of deprecated isomorphic-fetch.
+* Removed references to unused dependencies.
+
+## [0.1.0] - 2024-03-26
 
 ### Added
 

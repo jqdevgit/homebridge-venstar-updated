@@ -1,8 +1,5 @@
 // Venstar api interface
-require('isomorphic-fetch')
-const querystring = require('querystring');
-const request = require("request-promise-native");
-const http = require("http");
+require('whatwg-fetch')
 
 //exports.VenstarAPI = exports.GetInfoResponse = void 0;
 
@@ -65,6 +62,5 @@ class VenstarAPI {
         .catch((err) => console.log(err));
     }
 }
-
 
 exports.VenstarAPI = VenstarAPI;
