@@ -1,8 +1,12 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.1] - 2024-04-26
 
-## [0.2.0-beta.1] - 2024-03-31
+### Changed
+
+* Incorrect link in package.json
+
+## [0.2.0] - 2024-04-26
 
 ### Changed
 

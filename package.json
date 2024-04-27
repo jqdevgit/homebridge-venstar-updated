@@ -1,16 +1,16 @@
 {
 "displayName": "Venstar Thermostats",
 "name": "homebridge-venstar-updated",
-"version": "0.2.0-beta.1",
+"version": "0.2.1",
 "description": "Homebridge plugin for Venstar thermostats",
 "license": "ISC",
 "main": "index.js",
 "repository": {
 	"type": "git",
-	"url": "https://github.com/jqdevgit/homebridge-venstar-updated"
+	"url": "https://github.com/thestudiojq/homebridge-venstar-updated"
 },
 "bugs": {
-	"url": "https://github.com/jqdevgit/homebridge-venstar-updated/issues"
+	"url": "https://github.com/thestudiojq/homebridge-venstar-updated/issues"
 },
 "dependencies": {
 	"whatwg-fetch": "^3.6.20"
@@ -28,5 +28,5 @@
 	"thermostat",
 	"homebridge-plugin"
 ],
-"author": "jqdevgit"
+"author": "studiojq"
 }
