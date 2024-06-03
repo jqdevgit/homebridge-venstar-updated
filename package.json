@@ -1,32 +1,32 @@
 {
-"displayName": "Venstar Thermostats",
-"name": "homebridge-venstar-updated",
-"version": "0.2.1",
-"description": "Homebridge plugin for Venstar thermostats",
-"license": "ISC",
-"main": "index.js",
-"repository": {
-	"type": "git",
-	"url": "https://github.com/thestudiojq/homebridge-venstar-updated"
-},
-"bugs": {
-	"url": "https://github.com/thestudiojq/homebridge-venstar-updated/issues"
-},
-"dependencies": {
-	"whatwg-fetch": "^3.6.20"
-},
-"scripts": {
-	"test": "echo \"Error: no test specified\" && exit 1"
-},
-"engines": {
-	"node": "^18.17.0 || ^20.9.0",
-	"homebridge": "^1.6.0"
-},
-"keywords": [
-	"venstar",
-	"homebridge",
-	"thermostat",
-	"homebridge-plugin"
-],
-"author": "studiojq"
+	"displayName": "Venstar Thermostats",
+	"name": "homebridge-venstar-updated",
+	"version": "0.2.2",
+	"description": "Homebridge plugin for Venstar thermostats",
+	"author": "studiojq",
+	"license": "ISC",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thestudiojq/homebridge-venstar-updated"
+	},
+	"bugs": {
+		"url": "https://github.com/thestudiojq/homebridge-venstar-updated/issues"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"engines": {
+		"node": "^18.17.0 || ^20.9.0",
+		"homebridge": "^1.6.0"
+	},
+	"keywords": [
+		"venstar",
+		"homebridge",
+		"thermostat",
+		"homebridge-plugin"
+	],
+	"dependencies": {
+		"whatwg-fetch": "^3.6.20"
+	}
 }
