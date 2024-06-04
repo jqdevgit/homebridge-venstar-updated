@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.2] - 2024-06-03
+
+### Added
+
+* Added the ability to add a separate accessory for an outdoor sensor. See README for more info.
+
+### Changed
+
+* Cleaned up/updated code formatting.
+
 ## [0.2.1] - 2024-04-26
 
 ### Changed
